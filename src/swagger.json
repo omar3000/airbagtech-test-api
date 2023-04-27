@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API documentation Airbagtech test",
+    "description": "API in NodeJs"
+  },
+  "components":{
+    "securitySchemes": {
+      "ApiKeyAuth":{
+        "type": "apiKey",
+        "in": "header",
+        "name": "authorization"
+      }
+    }
+  },
+    
+
+  "host": "localhost:3000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Api useres sistema Airbagtech"
+    },
+    {
+      "name": "Combinations",
+      "description": "Api combinations sistema Airbagtech"
+    }
+  ],
+  "paths": {
+    "/users/": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Agregar usuario a la bd",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/users/logIn": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        },
+                
+        "summary": "LogIn propietario en la api",
+
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/combinations/": {
+      "get": {
+        "tags": [
+          "Combinations"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "o",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "id": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "email": {
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
