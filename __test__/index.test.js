@@ -68,7 +68,7 @@ describe('Unit tests', () => {
   });
   
   it('returns all combinations of three distinct digits', async () => {
-    const response = await request(app).get('/combinations').set('Authorization', `${token}`);;
+    const response = await request(app).get('/combinations').set('Authorization', `${token}`);
     expect(response.status).toBe(200);
     expect(response.body).toEqual(
       "012,013,014,015,016,017,018,019,023,024,025,026,027,028,029,034,035,036,037,038,039,045,046," +

@@ -18,7 +18,7 @@ async function crear(req, res){
             email: req.body.email,
             password: hashedPassword,
         }
-        const user = await UserController.findByEmail(req.body.email)
+        const user = await findByEmail(req.body.email)
 
         if (!user) {
             const userCreated = await User.create(newUserInfo)
