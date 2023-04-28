@@ -160,6 +160,41 @@
         }
       }
     },
+    "/repeat/": {
+      "post": {
+        "tags": [
+          "remove repets"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Elimina los repetidos",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+              "schema": {
+                "$ref": "#/definitions/repeat"
+              }
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
     "/cesar/": {
       "post": {
         "tags": [
@@ -226,6 +261,14 @@
       "type": "object",
       "properties": {
         "cards": {
+          "type": "array"
+        }
+      }
+    },
+    "repeat": {
+      "type": "object",
+      "properties": {
+        "array": {
           "type": "array"
         }
       }
