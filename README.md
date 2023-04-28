@@ -1,14 +1,13 @@
-# test-api
+# test-api-airbag
 
-Api desarrollada con js, nodejs, express, jwt, postgresql,swagger,sequelize <br>
+Api desarrollada con js, nodejs, express, jwt, postgresql,swagger,sequelize, jest <br>
 
 Instrucciones para ejecutar el proyecto: <br>
 
-Pegar el archivo ```.env ``` dentro de la carpeta ```src``` <br>
-Si desea utilizar una bd local cambiar la información del archivo <br>
+Pegar el archivo ```.env ``` en la raiz <br>
+Cambiar la información del archivo con tu informacion local <br>
 
-
-Si se opta por utilizar una bd local modificar el usuario y contraseña del archivo <br>
+Para la bd local modificar el usuario y contraseña del archivo <br>
 ```databse/db.ts``` <br>
 Si no dejarlo con la conexión actual <br>
 
@@ -22,23 +21,22 @@ Ejecutar el comando para  postgressql
 npm install --save pg pg-hstore
 ```
 
-Ejecutar el comando para migrar las tablas user y propiedades en caso de tener una bd local. <br>
-Puede utilizar la que esta configurada por default en el ```.env``` con aws y ya tiene las tablas creadas
-Y no es necesaria la migración, <br>
-
-Primero nos posicionamos dentro de la carpeta ```src``` <br>
-```cd src```
-
-Luego ejecutamos la migracion para crear las tablas en la bd solo si esta utilizando una bd local <br>
+Ejecutar el comando para migrar las tablas en la bd local. <br>
 ```sequelize db:migrate```
 
 Ejecutar el proyecto en modo dev <br>
 ```npm run dev``` 
 
 Abrir en su navegador
-```http://localhost:3000/api-inmuebles```
+```http://localhost:3000/api-airbatech```
 
 Te aparecerá una ventana de swagger con todos los endpoints <br>
 Deberas crear un usuario <br>
 despues hacer login con el usuario creado <br>
 El token que genere el login introducirlo en el candado de cualquier endpoint para que puedas acceder a los demas
+
+Para las pruebas unitarias en el userId y email para general el token poner uno valido de su base de datos <br>
+en el archivo. ```___tests___/index.test.js``` <br>  
+
+Para ejecutar los tests con jest <br>
+```npm run test``` 
