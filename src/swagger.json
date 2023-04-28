@@ -159,6 +159,41 @@
           }
         }
       }
+    },
+    "/cesar/": {
+      "post": {
+        "tags": [
+          "cesar"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Encriptacion Cesar",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+              "schema": {
+                "$ref": "#/definitions/cesar"
+              }
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -192,6 +227,17 @@
       "properties": {
         "cards": {
           "type": "array"
+        }
+      }
+    },
+    "cesar": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "string"
+        },
+        "displacement": {
+          "type": "number"
         }
       }
     }

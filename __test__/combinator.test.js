@@ -12,6 +12,24 @@ describe('Unit tests', () => {
   },
   process.env.JWT_KEY);
 
+  it(`returns result cesar`, async () => {
+    const strs = [
+      {"input": {"str": 'acdf', "displacement": 4 }, "output" : "EGHJ"},
+      {"input": {"str": 'dfghyrs', "displacement": 3}, "output" : "GIJKBUV"},
+      {"input": {"str": 'asdgh', "displacement": 7}, "output": "HZKNO"},
+    ];
+
+    for (let i = 0; i < strs.length; i++) {
+      const str = strs[i];
+      console.log(str)
+      const response = await request(app).post('/cesar').set('Authorization', `${token}`).send(str.input);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(str.output);
+      console.log(response)
+    }
+  }, 10000);
+
+
   it(`returns result blackjack`, async () => {
     const hands = [
       {"input": {"cards": ["A","2","K"]}, "output" : "13"},
