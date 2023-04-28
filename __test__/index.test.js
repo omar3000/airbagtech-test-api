@@ -7,10 +7,25 @@ require('dotenv').config();
 describe('Unit tests', () => {
 
   const token = jwt.sign({
-    email: 'ofa1995f14@deedde.com',
-    userId: '63b1b8f9-6468-40ae-aae4-0ec204e23910'
+    email: 'ofa1995@ede.com',
+    userId: '248897ab-db83-4a30-99f6-7f859a5333ba'
   },
   process.env.JWT_KEY);
+
+  it(`resolve expression eval`, async () => {
+    const operations = [
+      {"input": {"operation": '3+42*(1-2/(3+4)-1*21)+1' }, "output" : "-848"}
+    ];
+
+    for (let i = 0; i < operations.length; i++) {
+      const operation = operations[i];
+      const response = await request(app).post('/expression').set('Authorization', `${token}`).send(operation.input);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(operation.output);
+      console.log(response)
+    }
+  });
+
 
   it(`returns result remove repeats`, async () => {
     const nums = [
@@ -43,7 +58,7 @@ describe('Unit tests', () => {
       expect(response.body).toEqual(str.output);
       console.log(response)
     }
-  }, 10000);
+  });
 
 
   it(`returns result blackjack`, async () => {

@@ -215,6 +215,41 @@
           }
         }
       }
+    },
+    "/expression/": {
+      "post": {
+        "tags": [
+          "cesar"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Eval expression",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+              "schema": {
+                "$ref": "#/definitions/expression"
+              }
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -269,6 +304,15 @@
           "type": "number"
         }
       }
+    },
+    "expression": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string"
+        }
+      }
     }
+
   }
 }
