@@ -6,7 +6,7 @@ async function printCombinations(req, res)  {
 
   try{
 
-    resultHistory = await searchHistory(null, type.COMBINATIONS,null);
+    const resultHistory = await searchHistory(null, type.COMBINATIONS,null);
 
     if(resultHistory){
       res.status(200).json(resultHistory.output);
@@ -15,7 +15,7 @@ async function printCombinations(req, res)  {
   
     const combinations = [];
     const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    
+
     function backtrack(currCombination, currIndex) {
       if (currCombination.length === 3) {
         // Verificar que los dígitos no se repitan
