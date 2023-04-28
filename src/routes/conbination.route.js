@@ -2,7 +2,8 @@ const express = require("express");
 const chekAuth = require('../middleware/check-auth');
 
 const { printCombinations } = require('../controllers/combination.controller.js');
-const Users = express.Router();
+const Combination = express.Router();
 
-Users.get('/',chekAuth, printCombinations);
+Combination.get('/',chekAuth, printCombinations);
 
+module.exports = Combination;

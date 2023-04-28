@@ -18,20 +18,6 @@
 
   "host": "localhost:3000",
   "basePath": "",
-  "tags": [
-    {
-      "name": "Users",
-      "description": "Api useres sistema Airbagtech"
-    },
-    {
-      "name": "Combinations",
-      "description": "Api combinations sistema Airbagtech"
-    },
-    {
-      "name": "Blackjack",
-      "description": "Api blackjack sistema Airbagtech"
-    }
-  ],
   "paths": {
     "/users/": {
       "post": {
