@@ -1,4 +1,4 @@
-const { searchHistory, saveHistory } = require('../dbutils.js')
+const { searchHistory, saveHistory } = require('../dbutils.js');
 const { v4: uuidv4 } = require('uuid');
 const { type } = require('../consts.js');
 
@@ -6,7 +6,7 @@ const { type } = require('../consts.js');
 async function valueHandBlackjack(req, res) {
 
     let cards = req.body.cards;
-    console.log(cards)
+    console.log(cards);
 
     const resultHistory = await searchHistory(cards.join(','), type.BLACK_JACK,null);
 
@@ -37,10 +37,10 @@ async function valueHandBlackjack(req, res) {
       numAses--;
     }
 
-    await saveHistory({id: uuidv4(), input: cards.join(','),  output: valor.toString(), userid: req.userData.userId, type: type.BLACK_JACK})
+    await saveHistory({id: uuidv4(), input: cards.join(','),  output: valor.toString(), userid: req.userData.userId, type: type.BLACK_JACK});
       
     res.status(200).json(valor.toString());
   }
 
 
-module.exports = { valueHandBlackjack }
+module.exports = { valueHandBlackjack };

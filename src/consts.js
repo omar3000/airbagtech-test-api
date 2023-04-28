@@ -4,6 +4,6 @@ const type = {
     CESAR: 3,
     REPEAT: 4,
     EXPRESSION: 5
-}
+};
 
-module.exports = { type }
+module.exports = { type };

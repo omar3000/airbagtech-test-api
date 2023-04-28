@@ -34,4 +34,4 @@ const User =  sequelize.define('users', {
     ]
   });
 
-  module.exports = User
+  module.exports = User;

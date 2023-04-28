@@ -1,8 +1,9 @@
 const express = require("express");
 const chekAuth = require('../middleware/check-auth');
 
-const { evalExpression } = require('../controllers/evalexpression.controller.js')
-module.exports = Expression = express.Router()
+const { evalExpression } = require('../controllers/evalexpression.controller.js');
+const Expression = express.Router();
+Expression.post('/',chekAuth, evalExpression);
 
-Expression.post('/',chekAuth, evalExpression)
+module.exports = Expression;
 

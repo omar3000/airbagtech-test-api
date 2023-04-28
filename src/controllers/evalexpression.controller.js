@@ -7,20 +7,20 @@ async function evalExpression(req, res) {
 
     try{
 
-        resultHistory = await searchHistory(req.body.operation, type.EXPRESSION,null);
+        const resultHistory = await searchHistory(req.body.operation, type.EXPRESSION,null);
     
         if(resultHistory){
             res.status(200).json(resultHistory.output);
             return;
         }
         const result = calcularExpresion(req.body.operation);
-        await saveHistory({id: uuidv4(), input: req.body.operation, output: result, userid: req.userData.userId, type: type.EXPRESSION})
+        await saveHistory({id: uuidv4(), input: req.body.operation, output: result, userid: req.userData.userId, type: type.EXPRESSION});
           
         res.status(200).json(result.toString());
     }
     catch(error){
-        console.log(error)
-        res.status(500).send(error)
+        console.log(error);
+        res.status(500).send(error);
     }
 }
 
@@ -43,7 +43,7 @@ function calcularExpresion(expresion) {
     let operadores = [];
   
     // Separar la expresión en tokens
-    let tokens = expresion.match(/\d+|\+|\-|\*|\/|\(|\)/g);
+    let tokens = expresion.match(/\d+|\+|-|\*|\/|\(|\)/g);
   
     // Aplicar el algoritmo Shunting-yard
     for (let i = 0; i < tokens.length; i++) {

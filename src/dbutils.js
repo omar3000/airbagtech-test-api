@@ -4,25 +4,25 @@ async function searchHistory(input, type, inputExtra =  ''){
     try{
         const history = await History.findOne({
             where: { type, input, inputExtra }
-        })
-        return history
+        });
+        return history;
     }
     catch(error){
-        return null
+        return null;
     }
-} 
+}
 
 async function saveHistory(data){
     try{
-        console.log(data)
-        const history = await History.create(data)
-        return history
+        console.log(data);
+        const history = await History.create(data);
+        return history;
     }
     catch(error){
-        console.log(error)
-        return null
+        console.log(error);
+        return null;
     }
 } 
 
-module.exports = {searchHistory, saveHistory}
+module.exports = {searchHistory, saveHistory};
 

@@ -7,8 +7,8 @@ require('dotenv').config();
 describe('Unit tests', () => {
 
   const token = jwt.sign({
-    email: 'ofa1995f14@deedde.com',
-    userId: '63b1b8f9-6468-40ae-aae4-0ec204e23910'
+    email: 'ofa1995@ede.com',
+    userId: '248897ab-db83-4a30-99f6-7f859a5333ba'
   },
   process.env.JWT_KEY);
 
