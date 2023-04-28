@@ -26,7 +26,7 @@ async function encryptionCesar(req, res) {
           return alfabeto[indiceCifrado];
         });
     
-        await saveHistory({id: uuidv4(), input: letras, inpurExtra: req.body.displacement, output: cifrado.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR})
+        await saveHistory({id: uuidv4(), input: letras, inputExtra: req.body.displacement, output: cifrado.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR})
           
         res.status(200).json(cifrado.join('').toUpperCase());
     }
