@@ -7,6 +7,8 @@ const dotenv = require('dotenv');
 const  Users = require('./src/routes/user.route.js');
 const Combinations = require("./src/routes/conbination.route.js")
 const Blackjack = require('./src/routes/blackjack.route.js')
+const Cesar = require('./src/routes/cesar.route.js')
+
 dotenv.config();
 
 const app = express()
@@ -23,6 +25,8 @@ app.use('/api-airbatech', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/users', Users)
 app.use('/combinations', Combinations)
 app.use('/blackjack', Blackjack)
+app.use('/cesar', Cesar)
+
 // START SERVER
 app.listen(port, () => console.log(`server is running on port ${port}`))
 
