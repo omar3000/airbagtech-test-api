@@ -31,7 +31,7 @@ Deberas crear un usuario <br>
 despues hacer login con el usuario creado <br>
 El token que genere el login introducirlo en el candado de cualquier endpoint para que puedas acceder a los demas
 
-Para las pruebas unitarias en el userId y email para general el token poner uno valido de su base de datos <br>
+Para las pruebas unitarias en el userId y email para generar el token poner un usuario valido de su base de datos <br>
 en el archivo. ```___tests___/index.test.js``` <br>  
 
 Para ejecutar los tests con jest <br>
