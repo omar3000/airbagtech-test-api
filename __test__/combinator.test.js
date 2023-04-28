@@ -12,6 +12,22 @@ describe('Unit tests', () => {
   },
   process.env.JWT_KEY);
 
+  it(`returns result remove repeats`, async () => {
+    const nums = [
+      {"input": {"array": [5,4,2,4,6.7,88, 34]}, "output" : "5,4,2,6.7,88,34"},
+      {"input": {"array": [1,3,5,66,44,333,2,1,2,5,7,7]}, "output" : "1,3,5,66,44,333,2,7"},
+      {"input": {"array": [1,8,5,3,1,7,5,3,2]}, "output" : "1,8,5,3,7,2"}
+    ];
+
+    for (let i = 0; i < nums.length; i++) {
+      const num = nums[i];
+      const response = await request(app).post('/repeat').set('Authorization', `${token}`).send(num.input);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(num.output);
+      console.log(response)
+    }
+  });
+
   it(`returns result cesar`, async () => {
     const strs = [
       {"input": {"str": 'acdf', "displacement": 4 }, "output" : "EGHJ"},
@@ -32,7 +48,7 @@ describe('Unit tests', () => {
 
   it(`returns result blackjack`, async () => {
     const hands = [
-      {"input": {"cards": ["A","2","K"]}, "output" : "13"},
+      {"input": {"cards": ["A", "2", "Q"]}, "output" : "13"},
       {"input": {"cards": ["Q","8"]}, "output" : "18"},
       {"input": {"cards": ["A","4"]}, "output" : "15"},
       {"input": {"cards": ["A","K"]}, "output" : "21"},
