@@ -7,10 +7,6 @@ Instrucciones para ejecutar el proyecto: <br>
 Pegar el archivo ```.env ``` en la raiz <br>
 Cambiar la información del archivo con tu informacion local <br>
 
-Para la bd local modificar el usuario y contraseña del archivo <br>
-```databse/db.ts``` <br>
-Si no dejarlo con la conexión actual <br>
-
 Ejecutar el comando para instalar todas las librerias del proyecto <br>
 ```
 npm install 
