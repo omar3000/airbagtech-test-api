@@ -12,6 +12,21 @@ describe('Unit tests', () => {
   },
   process.env.JWT_KEY);
 
+  it(`resolve expression eval`, async () => {
+    const operations = [
+      {"input": {"operation": '3+42*(1-2/(3+4)-1*21)+1' }, "output" : "-848"}
+    ];
+
+    for (let i = 0; i < operations.length; i++) {
+      const operation = operations[i];
+      const response = await request(app).post('/expression').set('Authorization', `${token}`).send(operation.input);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(operation.output);
+      console.log(response)
+    }
+  });
+
+
   it(`returns result remove repeats`, async () => {
     const nums = [
       {"input": {"array": [5,4,2,4,6.7,88, 34]}, "output" : "5,4,2,6.7,88,34"},
@@ -43,7 +58,7 @@ describe('Unit tests', () => {
       expect(response.body).toEqual(str.output);
       console.log(response)
     }
-  }, 10000);
+  });
 
 
   it(`returns result blackjack`, async () => {
