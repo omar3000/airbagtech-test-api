@@ -8,7 +8,7 @@ async function valueHandBlackjack(req, res) {
     let cards = req.body.cards;
     console.log(cards)
 
-    resultHistory = await searchHistory(cards.join(','), type.BLACK_JACK,null);
+    const resultHistory = await searchHistory(cards.join(','), type.BLACK_JACK,null);
 
     if(resultHistory){
       res.status(200).json(resultHistory.output);

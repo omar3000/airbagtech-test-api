@@ -7,7 +7,7 @@ async function removeRepeats(req, res) {
 
     try{
     
-        resultHistory = await searchHistory(req.body.array.join(','), type.REPEAT,null);
+        const resultHistory = await searchHistory(req.body.array.join(','), type.REPEAT,null);
     
         if(resultHistory){
             res.status(200).json(resultHistory.output);
