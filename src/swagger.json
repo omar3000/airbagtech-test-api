@@ -26,6 +26,10 @@
     {
       "name": "Combinations",
       "description": "Api combinations sistema Airbagtech"
+    },
+    {
+      "name": "Blackjack",
+      "description": "Api blackjack sistema Airbagtech"
     }
   ],
   "paths": {
@@ -120,6 +124,41 @@
           }
         }
       }
+    },
+    "/blackjack/": {
+      "post": {
+        "tags": [
+          "blackjack"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Mano de blackjacK",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+              "schema": {
+                "$ref": "#/definitions/card"
+              }
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -145,6 +184,14 @@
         },
         "password": {
           "type": "string"
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "cards": {
+          "type": "array"
         }
       }
     }

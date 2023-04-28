@@ -4,13 +4,36 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
-describe('GET /combinations', () => {
+describe('Unit tests', () => {
+
+  const token = jwt.sign({
+    email: 'ofa1995f14@deedde.com',
+    userId: '63b1b8f9-6468-40ae-aae4-0ec204e23910'
+  },
+  process.env.JWT_KEY);
+
+  it(`returns result blackjack`, async () => {
+    const hands = [
+      {"input": {"cards": ["A","2","K"]}, "output" : "13"},
+      {"input": {"cards": ["Q","8"]}, "output" : "18"},
+      {"input": {"cards": ["A","4"]}, "output" : "15"},
+      {"input": {"cards": ["A","K"]}, "output" : "21"},
+      {"input": {"cards": ["A","A","J"]}, "output" : "12"},
+      {"input": {"cards": ["A","A","8"]}, "output" : "20"},
+      {"input": {"cards": ["3","3","9","A","6"]}, "output" : "22"},
+    ];
+
+    for (let i = 0; i < hands.length; i++) {
+      const hand = hands[i];
+      console.log(hand)
+      const response = await request(app).post('/blackjack').set('Authorization', `${token}`).send(hand.input);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(hand.output);
+      console.log(response)
+    }
+  });
+  
   it('returns all combinations of three distinct digits', async () => {
-    const token = jwt.sign({
-        email: 'ofa1995f14@deedde.com',
-        userId: '63b1b8f9-6468-40ae-aae4-0ec204e23910'
-    },
-    process.env.JWT_KEY);
     const response = await request(app).get('/combinations').set('Authorization', `${token}`);;
     expect(response.status).toBe(200);
     expect(response.body).toEqual(
@@ -21,4 +44,5 @@ describe('GET /combinations', () => {
       "368,369,378,379,389,456,457,458,459,467,468,469,478,479,489,567,568,569,578,579,589,678,679,689,789"
     );
   });
+
 });

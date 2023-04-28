@@ -1,6 +1,7 @@
 const { searchHistory, saveHistory } = require('../dbutils.js')
 const { v4: uuidv4 } = require('uuid');
 const { type } = require('../consts.js');
+
 async function printCombinations(req, res)  {
 
   try{
