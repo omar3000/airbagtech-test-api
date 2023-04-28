@@ -115,7 +115,7 @@
       "post": {
         "tags": [
           "blackjack"
-        ],
+        ],        
         "security": [
           {
             "ApiKeyAuth": []
@@ -282,15 +282,24 @@
       "type": "object",
       "properties": {
         "cards": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 5
         }
-      }
+      }  
     },
     "repeat": {
       "type": "object",
       "properties": {
         "array": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2
         }
       }
     },
