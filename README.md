@@ -19,10 +19,14 @@ npm install --save pg pg-hstore
 
 Ejecutar el comando para migrar las tablas en la bd local. <br>
 (Cabe recalcar que antes de ejecutar el comando crear la base de datos vacia) <br>
-```sequelize db:migrate```
+```
+sequelize db:migrate
+```
 
 Ejecutar el proyecto en modo dev <br>
-```npm run dev``` 
+```
+npm run dev
+``` 
 
 Abrir en su navegador
 ```http://localhost:3000/api-airbatech```
@@ -36,4 +40,6 @@ Para las pruebas unitarias en el ```userId``` y ```email``` para generar el toke
 en el archivo. ```___tests___/index.test.js``` <br>  
 
 Para ejecutar los tests con jest <br>
-```npm run test``` 
+```
+npm run test
+``` 
