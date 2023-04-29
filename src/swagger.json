@@ -24,11 +24,6 @@
         "tags": [
           "Users"
         ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
         "summary": "Agregar usuario a la bd",
         "requestBody":{
           "required": "true",
@@ -103,7 +98,6 @@
             "ApiKeyAuth": []
           }
         ],
-        "summary": "o",
         "responses": {
           "200": {
             "description": "OK"
