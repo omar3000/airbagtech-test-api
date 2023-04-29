@@ -13,27 +13,9 @@ async function printCombinations(req, res)  {
       return;
     }
   
-    const combinations = [];
-    const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let combinations = [];
 
-    function backtrack(currCombination, currIndex) {
-      if (currCombination.length === 3) {
-        // Verificar que los dígitos no se repitan
-        if (new Set(currCombination).size === 3) {
-          // Verificar que la combinación no haya sido generada previamente
-          const sortedCombination = [...currCombination].sort().join('');
-          if (!combinations.includes(sortedCombination)) {
-            combinations.push(sortedCombination);
-          }
-        }
-        return;
-      }
-      for (let i = currIndex; i < digits.length; i++) {
-        backtrack([...currCombination, digits[i]], i + 1);
-      }
-    }
-    
-    backtrack([], 0);
+    combinations = await backtrack([], 0, combinations);
   
     await saveHistory({id: uuidv4(), output: combinations.join(','), userid: req.userData.userId, type: type.COMBINATIONS});
   
@@ -45,6 +27,26 @@ async function printCombinations(req, res)  {
     res.status(500).send(error);
   }
 
+}
+
+async function backtrack(currCombination, currIndex, combinations) {
+  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  if (currCombination.length === 3) {
+    // Verificar que los dígitos no se repitan
+    if (new Set(currCombination).size === 3) {
+      // Verificar que la combinación no haya sido generada previamente
+      const sortedCombination = [...currCombination].sort().join('');
+      if (!combinations.includes(sortedCombination)) {
+        combinations.push(sortedCombination);
+      }
+    }
+    return combinations;
+  }
+  for (let i = currIndex; i < digits.length; i++) {
+    combinations =await backtrack([...currCombination, digits[i]], i + 1, combinations);
+  }
+  return combinations;
 }
 
 
