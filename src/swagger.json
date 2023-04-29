@@ -286,7 +286,7 @@
           "items": {
             "type": "string"
           },
-          "default": ["A", 2, "K"],
+          "default": ["A", "2", "K"],
           "minItems": 2,
           "maxItems": 5
         }

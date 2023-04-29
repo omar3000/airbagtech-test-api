@@ -3,11 +3,20 @@ const { v4: uuidv4 } = require('uuid');
 const User = require( "../models/user.model.js");
 const bcrypt = require("bcrypt");
 const jwt  = require( "jsonwebtoken");
+const { validationResult } = require("express-validator");
 
 const saltRounds = 10;
 dotenv.config();
 
 async function crear(req, res){
+    
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).send({errors: errors.array()});
+        return;
+    }
+
     try {
         const salt = await bcrypt.genSalt(saltRounds);
 
