@@ -20,15 +20,15 @@ const History =  sequelize.define('history', {
     allowNull: false,
   },
   input: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(1000),
     allowNull: true,
   },
   inputExtra: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(1000),
     allowNull: true,
   },
   output: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(1000),
     allowNull: true,
   }
 }, {

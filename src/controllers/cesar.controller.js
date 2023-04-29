@@ -15,7 +15,7 @@ async function encryptionCesar(req, res) {
   try{
     const letters = req.body.str.toLowerCase().split('');
 
-    const resultHistory = await searchHistory(letters.join(''), type.CESAR,req.body.displacement);
+    const resultHistory = await searchHistory(letters.join(''), type.CESAR,req.body.displacement.toString());
     
     if(resultHistory){
       res.status(200).json(resultHistory.output);
