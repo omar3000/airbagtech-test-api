@@ -19,15 +19,15 @@ module.exports = {
         allowNull: false,
       },
       input: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       inputExtra: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       output: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: true,
       },
       createdAt: {
