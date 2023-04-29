@@ -15,7 +15,7 @@ async function encryptionCesar(req, res) {
   try{
     const letters = req.body.str.toLowerCase().split('');
 
-    const resultHistory = await searchHistory(letters, type.CESAR,req.body.displacement);
+    const resultHistory = await searchHistory(letters.join(''), type.CESAR,req.body.displacement);
     
     if(resultHistory){
       res.status(200).json(resultHistory.output);
@@ -33,7 +33,7 @@ async function encryptionCesar(req, res) {
       return alphabet[indexEncryption];
     });
     
-    await saveHistory({id: uuidv4(), input: letters, inputExtra: req.body.displacement, output: encryption.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR});
+    await saveHistory({id: uuidv4(), input: letters.join(''), inputExtra: req.body.displacement, output: encryption.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR});
           
     res.status(200).json(encryption.join('').toUpperCase());
   }
