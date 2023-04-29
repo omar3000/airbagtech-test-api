@@ -1,15 +1,15 @@
 const { searchHistory, saveHistory } = require('../dbutils.js');
 const { v4: uuidv4 } = require('uuid');
 const { type } = require('../consts.js');
-const { validationResult } = require("express-validator");
+const { validationResult } = require('express-validator');
 
 async function valueHandBlackjack(req, res) {
 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-      res.status(422).send({errors: errors.array()});
-      return;
+    res.status(422).send({errors: errors.array()});
+    return;
   }
 
   let cards = req.body.cards;
@@ -23,30 +23,30 @@ async function valueHandBlackjack(req, res) {
   }
 
   // Inicializamos el valor de la mano a cero y contamos el número de Ases
-  let valor = 0;
+  let value = 0;
   let numAses = 0;
     
   // Recorremos las cartas y calculamos su valor
   for (let card of cards) {
     if (card === 'A') {
       numAses++;
-      valor += 11;
+      value += 11;
     } else if (card === 'J' || card === 'Q' || card === 'K') {
-      valor += 10;
+      value += 10;
     } else {
-      valor += parseInt(card);
+      value += parseInt(card);
     }
   }
     
   // Si tenemos algún As y el valor de la mano supera 21, restamos 10 al valor de cada As
-  while (numAses > 0 && valor > 21) {
-    valor -= 10;
+  while (numAses > 0 && value > 21) {
+    value -= 10;
     numAses--;
   }
 
-  await saveHistory({id: uuidv4(), input: cards.join(','),  output: valor.toString(), userid: req.userData.userId, type: type.BLACK_JACK});
+  await saveHistory({id: uuidv4(), input: cards.join(','),  output: value.toString(), userid: req.userData.userId, type: type.BLACK_JACK});
       
-  res.status(200).json(valor.toString());
+  res.status(200).json(value.toString());
 }
 
 

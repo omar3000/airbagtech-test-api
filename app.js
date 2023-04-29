@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
 const  Users = require('./src/routes/user.route.js');
-const Combination = require("./src/routes/conbination.route.js");
+const Combination = require('./src/routes/conbination.route.js');
 const Blackjack = require('./src/routes/blackjack.route.js');
 const Cesar = require('./src/routes/cesar.route.js');
 const Repeat = require('./src/routes/repeat.route.js');
