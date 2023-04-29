@@ -115,7 +115,7 @@
       "post": {
         "tags": [
           "blackjack"
-        ],
+        ],        
         "security": [
           {
             "ApiKeyAuth": []
@@ -215,6 +215,41 @@
           }
         }
       }
+    },
+    "/expression/": {
+      "post": {
+        "tags": [
+          "cesar"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Eval expression",
+        "requestBody":{
+          "required": "true",
+          "content":{
+            "application/json":{
+              "schema": {
+                "$ref": "#/definitions/expression"
+              }
+            }
+          }
+        },
+        
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -247,15 +282,26 @@
       "type": "object",
       "properties": {
         "cards": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["A", "2", "K"],
+          "minItems": 2,
+          "maxItems": 5
         }
-      }
+      }  
     },
     "repeat": {
       "type": "object",
       "properties": {
         "array": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "default": [8, 7, 7, 6, 1 ,2 , 8, 5],
+          "minItems": 2
         }
       }
     },
@@ -263,12 +309,24 @@
       "type": "object",
       "properties": {
         "str": {
-          "type": "string"
+          "type": "string",
+          "default": "adfgewxz"
         },
         "displacement": {
-          "type": "number"
+          "type": "number",
+          "default": 5
+        }
+      }
+    },
+    "expression": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "default": "3 + 42 * (1 - 2 / (3 + 4) - 1 * 21) + 1"
         }
       }
     }
+
   }
 }

@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { type } = require('../consts.js');
 
 async function printCombinations(req, res)  {
-
+  
   try{
 
     const resultHistory = await searchHistory(null, type.COMBINATIONS,null);

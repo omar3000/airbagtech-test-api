@@ -7,10 +7,6 @@ Instrucciones para ejecutar el proyecto: <br>
 Pegar el archivo ```.env ``` en la raiz <br>
 Cambiar la información del archivo con tu informacion local <br>
 
-Para la bd local modificar el usuario y contraseña del archivo <br>
-```databse/db.ts``` <br>
-Si no dejarlo con la conexión actual <br>
-
 Ejecutar el comando para instalar todas las librerias del proyecto <br>
 ```
 npm install 
@@ -35,7 +31,7 @@ Deberas crear un usuario <br>
 despues hacer login con el usuario creado <br>
 El token que genere el login introducirlo en el candado de cualquier endpoint para que puedas acceder a los demas
 
-Para las pruebas unitarias en el userId y email para general el token poner uno valido de su base de datos <br>
+Para las pruebas unitarias en el userId y email para generar el token poner un usuario valido de su base de datos <br>
 en el archivo. ```___tests___/index.test.js``` <br>  
 
 Para ejecutar los tests con jest <br>

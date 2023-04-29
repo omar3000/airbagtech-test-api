@@ -3,11 +3,20 @@ const { v4: uuidv4 } = require('uuid');
 const User = require( "../models/user.model.js");
 const bcrypt = require("bcrypt");
 const jwt  = require( "jsonwebtoken");
+const { validationResult } = require("express-validator");
 
 const saltRounds = 10;
 dotenv.config();
 
 async function crear(req, res){
+    
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).send({errors: errors.array()});
+        return;
+    }
+
     try {
         const salt = await bcrypt.genSalt(saltRounds);
 
@@ -56,22 +65,22 @@ async function findByEmail(email){
 async function login(req, res) {
     try {
 
-        const user = await findByEmail(req.body.email)
+        const user = await findByEmail(req.body.email);
 
         if(!user){
             res.status(401).send({
                 message: 'Auth failed email or password'
-            })
-            return
+            });
+            return;
         }
 
-        const result = await bcrypt.compare(req.body.password, String(user?.password))
+        const result = await bcrypt.compare(req.body.password, String(user?.password));
 
         if (!result){
             res.status(401).send({
                 message: 'Auth failed email or password x'
-            })
-            return
+            });
+            return;
         }
         const token = jwt.sign(
             {
@@ -82,16 +91,16 @@ async function login(req, res) {
             {
                 expiresIn: "500h"
             },
-        )
+        );
 
-        res.status(200).send({ status: "Success", message: 'Auth successful for 500h', userId: user?.id, token: token })
+        res.status(200).send({ status: "Success", message: 'Auth successful for 500h', userId: user?.id, token: token });
     
     } catch (error) {
-        console.log(error)
-        res.status(500).send(error)
+        console.log(error);
+        res.status(500).send(error);
     }
 }
 
 
-module.exports = {crear, login}
+module.exports = {crear, login};
 

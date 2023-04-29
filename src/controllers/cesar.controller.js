@@ -1,8 +1,16 @@
-const { searchHistory, saveHistory } = require('../dbutils.js')
+const { searchHistory, saveHistory } = require('../dbutils.js');
 const { v4: uuidv4 } = require('uuid');
 const { type } = require('../consts.js');
+const { validationResult } = require("express-validator");
 
 async function encryptionCesar(req, res) {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        res.status(422).send({errors: errors.array()});
+        return;
+    }
 
     try{
         const letras = req.body.str.toLowerCase().split('');
@@ -25,15 +33,15 @@ async function encryptionCesar(req, res) {
           return alfabeto[indiceCifrado];
         });
     
-        await saveHistory({id: uuidv4(), input: letras, inputExtra: req.body.displacement, output: cifrado.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR})
+        await saveHistory({id: uuidv4(), input: letras, inputExtra: req.body.displacement, output: cifrado.join('').toUpperCase(), userid: req.userData.userId, type: type.CESAR});
           
         res.status(200).json(cifrado.join('').toUpperCase());
     }
     catch(error){
-        console.log(error)
-        res.status(500).send(error)
+        console.log(error);
+        res.status(500).send(error);
     }
 
 }
 
-module.exports = { encryptionCesar }
+module.exports = { encryptionCesar };
