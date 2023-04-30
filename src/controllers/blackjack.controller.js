@@ -1,6 +1,6 @@
 const { searchHistory, saveHistory } = require('../dbutils.js');
 const { v4: uuidv4 } = require('uuid');
-const { type } = require('../consts.js');
+const { type, cardType } = require('../consts.js');
 const { validationResult } = require('express-validator');
 
 async function valueHandBlackjack(req, res) {
@@ -28,10 +28,10 @@ async function valueHandBlackjack(req, res) {
     
   // Recorremos las cartas y calculamos su valor
   for (let card of cards) {
-    if (card === 'A') {
+    if (card === cardType.AS) {
       numAses++;
       value += 11;
-    } else if (card === 'J' || card === 'Q' || card === 'K') {
+    } else if (card === cardType.JACK || card === cardType.QUEEN || card === cardType.KING) {
       value += 10;
     } else {
       value += parseInt(card);

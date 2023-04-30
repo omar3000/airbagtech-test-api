@@ -6,4 +6,20 @@ const type = {
   EXPRESSION: 5
 };
 
-module.exports = { type };
+const cardType = {
+  JACK: 'J',
+  QUEEN: 'Q',
+  AS: 'A',
+  KING: 'K',
+};
+
+const operatorType = {
+  ADDITION: '+',
+  SUBTRACTION: '-',
+  MULTIPLICATION: '*',
+  SPLIT: '/',
+  OPENING_PARENTHESIS : '(',
+  CLOSING_PARENTHESIS: ')'
+};
+
+module.exports = { type, cardType, operatorType };

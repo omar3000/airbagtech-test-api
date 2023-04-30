@@ -1,6 +1,6 @@
 const { searchHistory, saveHistory } = require('../dbutils.js');
 const { v4: uuidv4 } = require('uuid');
-const { type } = require('../consts.js');
+const { type, operatorType } = require('../consts.js');
 const { validationResult } = require('express-validator');
 
 async function evalExpression(req, res) {
@@ -35,11 +35,11 @@ function calculateExpresion(expresion) {
   // Función auxiliar para determinar la precedencia de los operadores
   function precedencia(op) {
     switch (op) {
-    case '+':
-    case '-':
+    case operatorType.ADDITION:
+    case operatorType.SUBTRACTION:
       return 1;
-    case '*':
-    case '/':
+    case operatorType.MULTIPLICATION:
+    case operatorType.SPLIT:
       return 2;
     default:
       return 0;
@@ -58,26 +58,26 @@ function calculateExpresion(expresion) {
     if (!isNaN(token)) {
       // Si el token es un número, agregarlo a la lista de números
       numbers.push(parseFloat(token));
-    } else if (token === '(') {
+    } else if (token === operatorType.OPENING_PARENTHESIS) {
       // Si el token es un paréntesis abierto, agregarlo a la lista de operadores
       operations.push(token);
-    } else if (token === ')') {
+    } else if (token === operatorType.CLOSING_PARENTHESIS) {
       // Si el token es un paréntesis cerrado, desapilar los operadores hasta encontrar el paréntesis abierto correspondiente
-      while (operations[operations.length - 1] !== '(') {
+      while (operations[operations.length - 1] !== operatorType.OPENING_PARENTHESIS) {
         let op = operations.pop();
         let b = numbers.pop();
         let a = numbers.pop();
         switch (op) {
-        case '+':
+        case operatorType.ADDITION:
           numbers.push(a + b);
           break;
-        case '-':
+        case operatorType.SUBTRACTION:
           numbers.push(a - b);
           break;
-        case '*':
+        case operatorType.MULTIPLICATION:
           numbers.push(a * b);
           break;
-        case '/':
+        case operatorType.SPLIT:
           numbers.push(a / b);
           break;
         }
@@ -86,21 +86,21 @@ function calculateExpresion(expresion) {
       operations.pop();
     } else {
       // Si el token es un operador, desapilar los operadores de mayor o igual precedencia hasta encontrar uno de menor precedencia o un paréntesis abierto
-      while (operations.length > 0 && operations[operations.length - 1] !== '(' && precedencia(token) <= precedencia(operations[operations.length - 1])) {
+      while (operations.length > 0 && operations[operations.length - 1] !== operatorType.OPENING_PARENTHESIS && precedencia(token) <= precedencia(operations[operations.length - 1])) {
         let op = operations.pop();
         let b = numbers.pop();
         let a = numbers.pop();
         switch (op) {
-        case '+':
+        case operatorType.ADDITION:
           numbers.push(a + b);
           break;
-        case '-':
+        case operatorType.SUBTRACTION:
           numbers.push(a - b);
           break;
-        case '*':
+        case operatorType.MULTIPLICATION:
           numbers.push(a * b);
           break;
-        case '/':
+        case operatorType.SPLIT:
           numbers.push(a / b);
           break;
         }
@@ -116,16 +116,16 @@ function calculateExpresion(expresion) {
     let b = numbers.pop();
     let a = numbers.pop();
     switch (op) {
-    case '+':
+    case operatorType.ADDITION:
       numbers.push(a + b);
       break;
-    case '-':
+    case operatorType.SUBTRACTION:
       numbers.push(a - b);
       break;
-    case '*':
+    case operatorType.MULTIPLICATION:
       numbers.push(a * b);
       break;
-    case '/':
+    case operatorType.SPLIT:
       numbers.push(a / b);
       break;
     }
